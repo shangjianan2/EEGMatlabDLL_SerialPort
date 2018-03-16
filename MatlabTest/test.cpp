@@ -8,7 +8,20 @@
 using namespace std;
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
-	CCyUSBDevice *p = new CCyUSBDevice();
+	
+	usb_receive();
+	mexPrintf("Done\n"); 
+}
 
-	mexPrintf("Hello World!!!\n"); 
+//void usb_receive(double x[])
+void usb_receive()
+{
+	CCyUSBDevice *USBDevice = new CCyUSBDevice();
+	USBDevice->Open(0);
+	if (USBDevice->IsOpen()){
+		mexPrintf("USB is open\n");
+	}
+	else{
+		mexPrintf("USB is not open\n");
+	}
 }
