@@ -1,0 +1,19 @@
+﻿生成启动时间为 2018/3/16 15:11:38。
+     1>项目“D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\MatlabTest\MatlabTest.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(355,5): warning MSB8003: Could not find WindowsSDKDir variable from the registry.  TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
+     1>Link:
+         E:\software\windows7\VisualStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\Debug\MatlabTest.dll" /INCREMENTAL /NOLOGO /LIBPATH:D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\MatlabTest libmex.lib libmat.lib libmx.lib libeng.lib CyAPI.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"test.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\Debug\MatlabTest.pdb" /SUBSYSTEM:WINDOWS,"5.01" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\Debug\MatlabTest.lib" /MACHINE:X86 /DLL Debug\test.obj
+         CyAPI.lib
+         libeng.lib
+         libmat.lib
+         libmex.lib
+         libmx.lib
+            正在创建库 D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\Debug\MatlabTest.lib 和对象 D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\Debug\MatlabTest.exp
+     1>test.obj : error LNK2019: 无法解析的外部符号 _mexPrintf，该符号在函数 _mexFunction 中被引用
+     1>test.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall CCyUSBDevice::CCyUSBDevice(void *,struct _GUID,int)" (??0CCyUSBDevice@@QAE@PAXU_GUID@@H@Z)，该符号在函数 _mexFunction 中被引用
+     1>D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\Debug\MatlabTest.dll : fatal error LNK1120: 2 个无法解析的外部命令
+     1>已完成生成项目“D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\MatlabTest\MatlabTest.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.17

@@ -1,0 +1,20 @@
+﻿生成启动时间为 2018/3/16 17:35:09。
+     1>项目“D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\MatlabTest\MatlabTest.vcxproj”在节点 2 上(Build 个目标)。
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(355,5): warning MSB8003: Could not find WindowsSDKDir variable from the registry.  TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
+     1>ClCompile:
+         E:\software\windows7\VisualStudio2013\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D MATLABTEST_EXPORTS /D _USING_V110_SDK71_ /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt test.cpp
+         test.cpp
+     1>d:\windows7\data\biancheng\dll\qudong\0316_2\matlabtest\matlabtest\CyAPI.h(78): warning C4161: #pragma pack(pop...) : 出栈的比入栈的多
+       Link:
+         E:\software\windows7\VisualStudio2013\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\x64\Debug\MatlabTest.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"test.def" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\x64\Debug\MatlabTest.pdb" /SUBSYSTEM:WINDOWS,"5.02" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\x64\Debug\MatlabTest.lib" /MACHINE:X64 /DLL x64\Debug\test.obj
+         CyAPI.lib
+         libeng.lib
+         libmat.lib
+         libmex.lib
+         libmx.lib
+         MatlabTest.vcxproj -> D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\x64\Debug\MatlabTest.dll
+     1>已完成生成项目“D:\windows7\data\biancheng\DLL\qudong\0316_2\MatlabTest\MatlabTest\MatlabTest.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.98
