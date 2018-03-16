@@ -9,4 +9,4 @@
 #define MEX_FUNCTION_API __declspec(dllimport)
 #endif
 MEX_FUNCTION_API void mexFunction(int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[]);
-void usb_receive();
+//void usb_receive();
