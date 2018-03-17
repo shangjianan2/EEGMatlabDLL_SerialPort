@@ -8,21 +8,21 @@
 using namespace std;
 
 
-void begin_command(CCyUSBDevice *USBDevice_tt)
-{
-	UCHAR array_begin[2];
-	PUCHAR p_array_begin = array_begin;
-	LONG len_begin;
-	array_begin[0] = 'S';
-	array_begin[1] = 'S';
-	len_begin = 2;
-	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
-		mexPrintf("begin is send\n");
-	}
-	else{
-		mexPrintf("begin is not send\n");
-	}
-}
+//void begin_command(CCyUSBDevice *USBDevice_tt)
+//{
+//	UCHAR array_begin[2];
+//	PUCHAR p_array_begin = array_begin;
+//	LONG len_begin;
+//	array_begin[0] = 'S';
+//	array_begin[1] = 'S';
+//	len_begin = 2;
+//	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
+//		mexPrintf("begin is send\n");
+//	}
+//	else{
+//		mexPrintf("begin is not send\n");
+//	}
+//}
 
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
@@ -40,24 +40,13 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	}
 	else{
 		mexPrintf("USB has not  been open yet\n");
-		USBDevice->Open(0);
-		begin_command(USBDevice);
+		return;
 	}
-
-	
-
-	if (USBDevice->IsOpen()){
-		LONG len = 1024;
+	LONG len = 1024;
 		
-		USBDevice->BulkInEndPt->XferData(buf, len);
-		for (int i = 0; i < 1024; i++){
-			x[i] = buf[i];
-		}
-
-
-	}
-	else{
-		mexPrintf("USB is not open\n");
+	USBDevice->BulkInEndPt->XferData(buf, len);
+	for (int i = 0; i < 1024; i++){
+		x[i] = buf[i];
 	}
 	mexPrintf("Done\n"); 
 }
