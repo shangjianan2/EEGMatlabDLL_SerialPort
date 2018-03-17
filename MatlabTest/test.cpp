@@ -27,39 +27,39 @@ void begin_command(CCyUSBDevice *USBDevice_tt)
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
 	CCyUSBDevice *USBDevice = new CCyUSBDevice();
-	PUCHAR buf = new UCHAR[1024];
-	double *x;
-	
-	
-	plhs[0] = mxCreateDoubleMatrix(1, 1024, mxREAL);
-	x = mxGetPr(plhs[0]);
+	//PUCHAR buf = new UCHAR[1024];
+	//double *x;
+	//
+	//
+	//plhs[0] = mxCreateDoubleMatrix(1, 1024, mxREAL);
+	//x = mxGetPr(plhs[0]);
 
 
-	if (USBDevice->IsOpen()){
-		mexPrintf("USB has already been open\n");
-	}
-	else{
-		mexPrintf("USB has not  been open yet\n");
-		USBDevice->Open(0);
+	//if (USBDevice->IsOpen()){
+	//	mexPrintf("USB has already been open\n");
+	//}
+	//else{
+	//	mexPrintf("USB has not  been open yet\n");
+	//	USBDevice->Open(0);
 		begin_command(USBDevice);
-	}
+	//}
 
-	
+	//
 
-	if (USBDevice->IsOpen()){
-		LONG len = 1024;
-		
-		USBDevice->BulkInEndPt->XferData(buf, len);
-		for (int i = 0; i < 1024; i++){
-			x[i] = buf[i];
-		}
+	//if (USBDevice->IsOpen()){
+	//	LONG len = 1024;
+	//	
+	//	USBDevice->BulkInEndPt->XferData(buf, len);
+	//	for (int i = 0; i < 1024; i++){
+	//		x[i] = buf[i];
+	//	}
 
 
-	}
-	else{
-		mexPrintf("USB is not open\n");
-	}
-	mexPrintf("Done\n"); 
+	//}
+	//else{
+	//	mexPrintf("USB is not open\n");
+	//}
+	//mexPrintf("Done\n"); 
 }
 
 //void usb_receive(double* x)
