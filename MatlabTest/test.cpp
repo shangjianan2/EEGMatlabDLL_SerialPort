@@ -7,24 +7,21 @@
 
 using namespace std;
 
+#define SIZE_READ 18432
+// #define DUANCENG 18432
 
-//void begin_command(CCyUSBDevice *USBDevice_tt)
-//{
-//	UCHAR array_begin[2];
-//	PUCHAR p_array_begin = array_begin;
-//	LONG len_begin;
-//	array_begin[0] = 'S';
-//	array_begin[1] = 'S';
-//	len_begin = 2;
-//	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
-//		mexPrintf("begin is send\n");
-//	}
-//	else{
-//		mexPrintf("begin is not send\n");
-//	}
-//}
+void output_ZhenTou(PUCHAR buf_tt, double *x_tt)
+{
+	int temp_Size = SIZE_READ / 128;
+	int temp_Size1 = SIZE_READ - temp_Size;
+	for (int i = 0; i < temp_Size; i++){
+		x_tt[i] = buf_tt[i * 128 + 4]*65536 + buf_tt[i * 128 + 5]*256 + buf_tt[ i * 128 + 6 ];
+		//if (x_tt[i] > 1000)
+		//	mexPrintf("Larger Than 1000");
+	}
+}
 
-#define SIZE_READ 16384
+
 
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
@@ -33,7 +30,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	double *x;
 	
 	
-	plhs[0] = mxCreateDoubleMatrix(1, SIZE_READ, mxREAL);
+	plhs[0] = mxCreateDoubleMatrix(1, SIZE_READ / 128, mxREAL);
 	x = mxGetPr(plhs[0]);
 
 
@@ -47,9 +44,13 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	LONG len = SIZE_READ;
 		
 	USBDevice->BulkInEndPt->XferData(buf, len);
+#ifdef DUANCENG
+	output_ZhenTou(buf, x);
+#else
 	for (int i = 0; i < SIZE_READ; i++){
 		x[i] = buf[i];
 	}
+#endif
 	mexPrintf("Done\n"); 
 }
 
