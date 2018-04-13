@@ -10,17 +10,56 @@ using namespace std;
 
 void begin_command(CCyUSBDevice *USBDevice_tt)
 {
-	UCHAR array_begin[2];
+	UCHAR array_begin[6];
 	PUCHAR p_array_begin = array_begin;
 	LONG len_begin;
-	array_begin[0] = 'S';
+	array_begin[0] = 'T';
 	array_begin[1] = 'S';
-	len_begin = 2;
+	array_begin[2] = 219;
+	
+	array_begin[4] = 182;
+	array_begin[5] = 109;
+	
+	len_begin = 6;
+
+	array_begin[3] = 'G';
 	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
-		mexPrintf("begin is send\n");
+		mexPrintf("FangDa is send G\n");
 	}
 	else{
-		mexPrintf("begin is not send\n");
+		mexPrintf("FangDa is not send\n");
+	}
+
+	array_begin[3] = 'H';
+	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
+		mexPrintf("FangDa is send H\n");
+	}
+	else{
+		mexPrintf("FangDa is not send\n");
+	}
+
+	array_begin[3] = 'I';
+	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
+		mexPrintf("FangDa is send I\n");
+	}
+	else{
+		mexPrintf("FangDa is not send\n");
+	}
+
+	array_begin[3] = 'J';
+	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
+		mexPrintf("FangDa is send J\n");
+	}
+	else{
+		mexPrintf("FangDa is not send\n");
+	}
+
+	array_begin[3] = 'K';
+	if (USBDevice_tt->BulkOutEndPt->XferData(p_array_begin, len_begin) == true){
+		mexPrintf("FangDa is send K\n");
+	}
+	else{
+		mexPrintf("FangDa is not send\n");
 	}
 }
 
