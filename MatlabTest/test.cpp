@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#define LENGTH 256000
+
 
 //void begin_command(CCyUSBDevice *USBDevice_tt)
 //{
@@ -27,14 +29,14 @@ using namespace std;
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
 	CCyUSBDevice *USBDevice = new CCyUSBDevice();
-	PUCHAR buf = new UCHAR[1024];
+	PUCHAR buf = new UCHAR[LENGTH];
 	double *x;
 	
 	
-	plhs[0] = mxCreateDoubleMatrix(1, 1024, mxREAL);
+	plhs[0] = mxCreateDoubleMatrix(1, LENGTH, mxREAL);
 	x = mxGetPr(plhs[0]);
 
-
+	USBDevice->Open(0);
 	if (USBDevice->IsOpen()){
 		mexPrintf("USB has already been open\n");
 	}
@@ -42,10 +44,10 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 		mexPrintf("USB has not  been open yet\n");
 		return;
 	}
-	LONG len = 1024;
+	LONG len = LENGTH;
 		
 	USBDevice->BulkInEndPt->XferData(buf, len);
-	for (int i = 0; i < 1024; i++){
+	for (int i = 0; i < LENGTH; i++){
 		x[i] = buf[i];
 	}
 	mexPrintf("Done\n"); 
