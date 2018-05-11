@@ -38,7 +38,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 
 	USBDevice->Open(0);
 	if (USBDevice->IsOpen()){
-		mexPrintf("USB has already been open\n");
+		//mexPrintf("USB has already been open\n");
 	}
 	else{
 		mexPrintf("USB has not  been open yet\n");
