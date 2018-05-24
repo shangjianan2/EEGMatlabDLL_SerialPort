@@ -1,4 +1,4 @@
-﻿生成启动时间为 2018/5/24 15:36:43。
+﻿生成启动时间为 2018/5/24 16:28:41。
      1>项目“D:\windows7\data\biancheng\DLL\qudong\SerialPort_1\MatlabTest\MatlabTest\MatlabTest.vcxproj”在节点 2 上(Build 个目标)。
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(355,5): warning MSB8003: Could not find WindowsSDKDir variable from the registry.  TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
      1>ClCompile:
@@ -12,11 +12,9 @@
          libmat.lib
          libmex.lib
          libmx.lib
-     1>test.obj : warning LNK4197: 多次指定导出“mexFunction”；使用第一个规范
-            正在创建库 D:\windows7\data\biancheng\DLL\qudong\SerialPort_1\MatlabTest\x64\Debug\MatlabTest.lib 和对象 D:\windows7\data\biancheng\DLL\qudong\SerialPort_1\MatlabTest\x64\Debug\MatlabTest.exp
          MatlabTest.vcxproj -> D:\windows7\data\biancheng\DLL\qudong\SerialPort_1\MatlabTest\x64\Debug\MatlabTest.dll
      1>已完成生成项目“D:\windows7\data\biancheng\DLL\qudong\SerialPort_1\MatlabTest\MatlabTest\MatlabTest.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:02.04
+已用时间 00:00:00.56
