@@ -23,10 +23,20 @@ void Read_From_SerialPort(HANDLE handle_tt, char *buff, DWORD *length)//不知道这
 	ReadFile(handle_tt, buff, temp_length, length, NULL);
 }
 
+void Init_TimeOuts(COMMTIMEOUTS *p_timeouts)
+{
+	p_timeouts->ReadIntervalTimeout = 10000;
+	p_timeouts->ReadTotalTimeoutConstant = 10000;
+	p_timeouts->ReadTotalTimeoutMultiplier = 10000;
+	//p_timeouts->WriteTotalTimeoutConstant = 
+	//p_timeouts->WriteTotalTimeoutMultiplier = 
+}
+
 
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
 	DCB m_dcb;//存放串口配置的结构体
+	COMMTIMEOUTS timeout;//设置超时时间
 
 	double *x;
 	plhs[0] = mxCreateDoubleMatrix(1, BUFF_LENGTH, mxREAL);
@@ -54,6 +64,10 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	Init_DCB(&m_dcb);//初始化DCB结构体
 	SetCommState(m_hComm, &m_dcb);
 
+	//设置串口的超时时间
+	Init_TimeOuts(&timeout);
+	SetCommTimeouts(m_hComm, &timeout);
+	
 	//清空读缓冲区,准备读取数据
 	PurgeComm(m_hComm, PURGE_RXCLEAR);
 
