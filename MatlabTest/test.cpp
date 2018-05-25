@@ -38,8 +38,22 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	DCB m_dcb;//存放串口配置的结构体
 	COMMTIMEOUTS timeout;//设置超时时间
 
+	//解析输入参数
+	int num_com = mxGetScalar(prhs[1]);//获取获取串口号
+	WCHAR *p_input = new WCHAR[5];
+	p_input[0] = 'C';
+	p_input[1] = 'O';
+	p_input[2] = 'M';
+	p_input[3] = num_com + 48;//将整型数值转换成ascii码的数值
+	p_input[4] = '\0';
+
+	DWORD buff_length = 0;
+	buff_length = mxGetScalar(prhs[1]);//获取读数据的长度
+
+
+	//输出指针
 	double *x;
-	plhs[0] = mxCreateDoubleMatrix(1, BUFF_LENGTH, mxREAL);
+	plhs[0] = mxCreateDoubleMatrix(1, buff_length, mxREAL);
 	x = mxGetPr(plhs[0]);
 	
 	HANDLE m_hComm = CreateFile(TEXT("COM2"),						// communication port string (COMX)
@@ -72,11 +86,11 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	PurgeComm(m_hComm, PURGE_RXCLEAR);
 
 	//同步读取串口缓冲区数据
-	DWORD len = BUFF_LENGTH;
+	DWORD len = buff_length;
 	char *p_buff = new char[len];
 	Read_From_SerialPort(m_hComm, p_buff, &len);
 
-	for (int i = 0; i < BUFF_LENGTH; i++){
+	for (int i = 0; i < buff_length; i++){
 		x[i] = p_buff[i];
 	}
 
