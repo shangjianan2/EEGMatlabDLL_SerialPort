@@ -32,6 +32,43 @@ void Init_TimeOuts(COMMTIMEOUTS *p_timeouts)
 	//p_timeouts->WriteTotalTimeoutMultiplier = 
 }
 
+HANDLE connect_com(int num_com_tt)
+{
+	switch (num_com_tt)
+	{
+	case 0:
+		return CreateFile(TEXT("COM0"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 1:
+		return CreateFile(TEXT("COM1"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 2:
+		return CreateFile(TEXT("COM2"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 3:
+		return CreateFile(TEXT("COM3"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 4:
+		return CreateFile(TEXT("COM4"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 5:
+		return CreateFile(TEXT("COM5"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 6:
+		return CreateFile(TEXT("COM6"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 7:
+		return CreateFile(TEXT("COM7"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 8:
+		return CreateFile(TEXT("COM8"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 9:
+		return CreateFile(TEXT("COM9"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	}
+}
+
 
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
@@ -39,13 +76,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	COMMTIMEOUTS timeout;//设置超时时间
 
 	//解析输入参数
-	int num_com = mxGetScalar(prhs[1]);//获取获取串口号
-	WCHAR *p_input = new WCHAR[5];
-	p_input[0] = 'C';
-	p_input[1] = 'O';
-	p_input[2] = 'M';
-	p_input[3] = num_com + 48;//将整型数值转换成ascii码的数值
-	p_input[4] = '\0';
+	int num_com = mxGetScalar(prhs[0]);//获取获取串口号
 
 	DWORD buff_length = 0;
 	buff_length = mxGetScalar(prhs[1]);//获取读数据的长度
@@ -56,13 +87,8 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	plhs[0] = mxCreateDoubleMatrix(1, buff_length, mxREAL);
 	x = mxGetPr(plhs[0]);
 	
-	HANDLE m_hComm = CreateFile(TEXT("COM2"),						// communication port string (COMX)
-		GENERIC_READ | GENERIC_WRITE,	// read/write types
-		0,								// comm devices must be opened with exclusive access
-		NULL,							// no security attributes
-		OPEN_EXISTING,					// comm devices must use OPEN_EXISTING
-		0,			// Async I/O
-		0);							// template must be 0 for comm devices
+	HANDLE m_hComm = connect_com(num_com);
+
 	if (m_hComm == (HANDLE)-1)
 	{
 		mexPrintf("failed to open\n");
