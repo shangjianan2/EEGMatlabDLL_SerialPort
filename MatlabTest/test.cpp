@@ -117,7 +117,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	Read_From_SerialPort(m_hComm, p_buff, &len);
 
 	for (int i = 0; i < buff_length; i++){
-		x[i] = p_buff[i];
+		x[i] = (UCHAR)p_buff[i];
 	}
 
 	mexPrintf("length: %d\n", len);

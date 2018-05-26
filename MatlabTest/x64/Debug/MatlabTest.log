@@ -1,4 +1,4 @@
-﻿生成启动时间为 2018/5/25 10:18:47。
+﻿生成启动时间为 2018/5/26 9:34:23。
      1>项目“D:\windows7\data\biancheng\DLL\qudong\SerialPort_1\MatlabTest\MatlabTest\MatlabTest.vcxproj”在节点 2 上(Build 个目标)。
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(355,5): warning MSB8003: Could not find WindowsSDKDir variable from the registry.  TargetFrameworkVersion or PlatformToolset may be set to an invalid version number.
      1>ClCompile:
@@ -21,4 +21,4 @@
 
 生成成功。
 
-已用时间 00:00:00.62
+已用时间 00:00:01.29
