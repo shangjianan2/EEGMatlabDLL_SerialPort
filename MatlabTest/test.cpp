@@ -118,19 +118,6 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	//同步读取串口缓冲区数据
 	DWORD len = buff_length;
 	char *p_buff = new char[len];
-	
-	//if (len > REC_BUFF_SIZE)//如果读取的数据长度大于缓冲区的长度,就不能用同步方式一次性读完所有数据,需要分批读取
-	//{
-	//	DWORD temp_rec_buf_size = REC_BUFF_SIZE;
-	//	Read_From_SerialPort(m_hComm, p_buff, &temp_rec_buf_size);
-	//	len = len - temp_rec_buf_size;//计算剩下要读取的长度
-	//	Read_From_SerialPort(m_hComm, &p_buff[temp_rec_buf_size], &len);
-	//	len = len + temp_rec_buf_size;//计算实际读取数据的长度
-	//}
-	//else//如果小于缓冲区长度,就可以正常用同步方式一次性读取数据
-	//{
-	//	Read_From_SerialPort(m_hComm, p_buff, &len);
-	//}
 
 	DWORD temp_for = 1;
 
