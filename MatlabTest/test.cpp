@@ -70,6 +70,35 @@ HANDLE connect_com(int num_com_tt)
 	}
 }
 
+void Init_send_start_command(PUCHAR p_send_command, PDWORD p_len)
+{
+	p_send_command[0] = 'S';
+	p_send_command[1] = 'S';
+	*p_len = 2;
+}
+
+void Init_send_fangda_command(PUCHAR p_send_command, PDWORD p_len)//修改放大倍数
+{
+	p_send_command[0] = 0x53;
+	p_send_command[1] = 0x54;
+	p_send_command[2] = 0x47;
+	p_send_command[3] = 0x0;
+	p_send_command[4] = 0x0;
+	p_send_command[5] = 0x0;
+	*p_len = 6;
+}
+
+void Init_send_caiyang_command(PUCHAR p_send_command, PDWORD p_len)//修改采样率
+{
+	p_send_command[0] = 0x53;
+	p_send_command[1] = 0x54;
+	p_send_command[2] = 0x52;
+	p_send_command[3] = 0x35;
+	p_send_command[4] = 0x45;
+	p_send_command[5] = 0x44;
+	*p_len = 6;
+}
+
 
 extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray*prhs[])
 {
@@ -79,14 +108,12 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	//解析输入参数
 	int num_com = mxGetScalar(prhs[0]);//获取获取串口号
 
-	DWORD buff_length = 0;
-	buff_length = mxGetScalar(prhs[1]);//获取读数据的长度
+	DWORD len = 0;//发送数据的长度
+	PUCHAR p_send_command = new UCHAR[6];//发送数据的数组
 
 
-	//输出指针
-	double *x;
-	plhs[0] = mxCreateDoubleMatrix(1, buff_length, mxREAL);
-	x = mxGetPr(plhs[0]);
+
+	
 	
 	HANDLE m_hComm = connect_com(num_com);
 
@@ -98,7 +125,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	}
 	else
 	{
-		mexPrintf("success to open\n");
+		//mexPrintf("success to open\n");
 	}
 
 	GetCommState(m_hComm, &m_dcb);//获取原本的串口的配置
@@ -112,29 +139,18 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	//设置缓冲区大小
 	SetupComm(m_hComm, REC_BUFF_SIZE, 1024);//最大值只能是65536
 	
-	//清空读缓冲区,准备读取数据
-	PurgeComm(m_hComm, PURGE_RXCLEAR);
+	Init_send_start_command(p_send_command, &len);
+	WriteFile(m_hComm, p_send_command, len, &len, NULL);//发送开始指令
 
-	//同步读取串口缓冲区数据
-	DWORD len = buff_length;
-	char *p_buff = new char[len];
+	Init_send_fangda_command(p_send_command, &len);
+	WriteFile(m_hComm, p_send_command, len, &len, NULL);//修改放大倍数为1
 
-	DWORD temp_for = 1;
-
-	for (int i = 0; i < buff_length; i++)//每次读取一个数据
-	{
-		Read_From_SerialPort(m_hComm, &p_buff[i], &temp_for);
-		temp_for = 1;//重新赋值为1
-	}
-
-	for (int i = 0; i < buff_length; i++){
-		x[i] = (UCHAR)p_buff[i];
-	}
-
-	mexPrintf("length: %d\n", len);
+	Init_send_caiyang_command(p_send_command, &len);
+	WriteFile(m_hComm, p_send_command, len, &len, NULL);//修改采样率
 
 
-	delete[] p_buff;//释放空间
+
+	delete[] p_send_command;//释放空间
 	CloseHandle(m_hComm);
 	 
 }
