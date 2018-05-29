@@ -142,8 +142,12 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	Init_send_start_command(p_send_command, &len);
 	WriteFile(m_hComm, p_send_command, len, &len, NULL);//发送开始指令
 
+	Sleep(1000);//延时1秒
+
 	Init_send_fangda_command(p_send_command, &len);
 	WriteFile(m_hComm, p_send_command, len, &len, NULL);//修改放大倍数为1
+
+	Sleep(1000);//延时1秒
 
 	Init_send_caiyang_command(p_send_command, &len);
 	WriteFile(m_hComm, p_send_command, len, &len, NULL);//修改采样率
