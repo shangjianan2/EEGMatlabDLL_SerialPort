@@ -6,6 +6,7 @@
 
 #define BUFF_LENGTH 3
 #define REC_BUFF_SIZE 5*34
+#define Length_Zhen 34
 
 
 using namespace std;
@@ -80,7 +81,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	int num_com = mxGetScalar(prhs[0]);//获取获取串口号
 
 	DWORD buff_length = 0;
-	buff_length = mxGetScalar(prhs[1]);//获取读数据的长度
+	buff_length = mxGetScalar(prhs[1]) + Length_Zhen;//获取读数据的长度, 多读一帧数据
 
 
 	//输出指针
@@ -98,7 +99,7 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	}
 	else
 	{
-		mexPrintf("success to open\n");
+		//mexPrintf("success to open\n");
 	}
 
 	GetCommState(m_hComm, &m_dcb);//获取原本的串口的配置
@@ -130,8 +131,6 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	for (int i = 0; i < buff_length; i++){
 		x[i] = (UCHAR)p_buff[i];
 	}
-
-	mexPrintf("length: %d\n", len);
 
 
 	delete[] p_buff;//释放空间
