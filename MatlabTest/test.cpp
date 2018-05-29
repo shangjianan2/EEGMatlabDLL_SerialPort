@@ -108,6 +108,9 @@ extern "C" MEX_FUNCTION_API void mexFunction(int nlhs, mxArray *plhs[], int nrhs
 	Init_TimeOuts(&timeout);
 	SetCommTimeouts(m_hComm, &timeout);
 	
+	//设置缓冲区大小
+	SetupComm(m_hComm, 98304, 1024);
+	
 	//清空读缓冲区,准备读取数据
 	PurgeComm(m_hComm, PURGE_RXCLEAR);
 
