@@ -11,7 +11,7 @@ using namespace std;
 
 void Init_DCB(DCB *p_DCB)
 {
-	p_DCB->BaudRate = CBR_9600;
+	p_DCB->BaudRate = 921600;
 	p_DCB->Parity = NOPARITY;//失能校验位
 	p_DCB->StopBits = ONESTOPBIT;//一位停止位
 	p_DCB->ByteSize = 8;//数据为8位
