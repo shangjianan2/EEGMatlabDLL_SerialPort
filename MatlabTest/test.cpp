@@ -12,7 +12,7 @@ using namespace std;
 
 void Init_DCB(DCB *p_DCB)
 {
-	p_DCB->BaudRate = 921600;
+	p_DCB->BaudRate = 230400;
 	p_DCB->Parity = NOPARITY;//失能校验位
 	p_DCB->StopBits = ONESTOPBIT;//一位停止位
 	p_DCB->ByteSize = 8;//数据为8位
@@ -66,6 +66,24 @@ HANDLE connect_com(int num_com_tt)
 		break;
 	case 9:
 		return CreateFile(TEXT("COM9"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 10:
+		return CreateFile(TEXT("COM10"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 11:
+		return CreateFile(TEXT("COM11"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 12:
+		return CreateFile(TEXT("COM12"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 13:
+		return CreateFile(TEXT("COM13"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 14:
+		return CreateFile(TEXT("COM14"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
+		break;
+	case 15:
+		return CreateFile(TEXT("COM15"), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, 0);
 		break;
 	}
 }
